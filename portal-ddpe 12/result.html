@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hasil Pemetaan · DDPE 2026</title>
+  <link rel="icon" href="assets/logo-ddpe.jpg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    .result-wrap { max-width: 720px; margin: 0 auto; padding: 6.5rem 1.25rem 4rem; }
+    .result-header { text-align: center; margin-bottom: 2rem; }
+    .result-header h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; margin-top: 0.75rem; }
+    .gradient-text {
+      background: linear-gradient(135deg, #c4b5fd, #60a5fa, #fbbf24);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .result-hero-card {
+      background: linear-gradient(145deg, rgba(124,58,237,0.22), rgba(37,99,235,0.12), rgba(212,175,55,0.08));
+      border: 1px solid rgba(167,139,250,0.28);
+      border-radius: 24px;
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      margin-bottom: 1.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .result-hero-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(251,191,36,0.12), transparent 45%);
+      pointer-events: none;
+    }
+    .top-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.35rem 0.85rem; border-radius: 999px;
+      background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.35);
+      color: #fbbf24; font-size: 0.78rem; font-weight: 600; margin-bottom: 0.85rem;
+    }
+    .top-role-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .top-role-desc { color: var(--text-muted); font-size: 0.92rem; max-width: 420px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: #a78bfa; margin: 2rem 0 0.85rem;
+    }
+    .radar-wrap {
+      padding: 1.25rem; border-radius: 20px; margin-bottom: 0.5rem;
+      max-width: 420px; margin-left: auto; margin-right: auto;
+    }
+    .dimension-list { display: grid; gap: 0.55rem; margin-bottom: 0.5rem; }
+    .dim-item { padding: 0.7rem 0.9rem; border-radius: 12px; }
+    .dim-name { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.35rem; }
+    .dim-name span:last-child { color: #fbbf24; font-weight: 600; }
+    .dim-track { height: 6px; background: rgba(255,255,255,0.08); border-radius: 99px; overflow: hidden; }
+    .dim-fill {
+      height: 100%; border-radius: 99px;
+      background: linear-gradient(90deg, #7c3aed, #3b82f6, #fbbf24);
+      transition: width 0.8s ease;
+    }
+    .role-cards { display: grid; gap: 0.75rem; }
+    .role-card { padding: 1.15rem 1.25rem; border-radius: 16px; }
+    .role-card h4 { font-size: 1rem; margin-bottom: 0.35rem; }
+    .role-card p { color: var(--text-muted); font-size: 0.88rem; }
+    .role-fit {
+      display: inline-block; margin-top: 0.55rem;
+      font-size: 0.75rem; font-weight: 600; color: #fbbf24;
+      padding: 0.2rem 0.6rem; border-radius: 999px;
+      background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.25);
+    }
+    .twibbon-section {
+      padding: 1.75rem 1.25rem; border-radius: 20px; margin-top: 1.5rem; text-align: center;
+    }
+    .twibbon-preview {
+      width: min(340px, 88vw); height: min(340px, 88vw);
+      margin: 1rem auto 1.25rem; border-radius: 18px; overflow: hidden;
+      background: #0f0a1f; box-shadow: 0 16px 48px rgba(0,0,0,0.45), 0 0 0 1px rgba(212,175,55,0.2);
+    }
+    .twibbon-preview canvas { width: 100%; height: 100%; display: block; }
+    .caption-box { margin-top: 1.25rem; padding: 1.1rem; text-align: left; border-radius: 14px; }
+    .caption-box textarea {
+      width: 100%; resize: vertical; min-height: 120px;
+      background: rgba(0,0,0,0.28); border: 1px solid var(--glass-border);
+      border-radius: 10px; color: #e2e8f0; padding: 0.75rem;
+      font-size: 0.85rem; line-height: 1.55; font-family: Inter, sans-serif;
+    }
+    .action-row { display: flex; gap: 0.65rem; justify-content: center; flex-wrap: wrap; }
+  
+    .qr-float{position:fixed;bottom:1rem;right:1rem;z-index:40;background:rgba(15,10,31,0.92);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:0.5rem;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,0.35)}
+    .qr-float img{width:72px;height:72px;display:block;border-radius:6px}
+    .qr-float span{font-size:0.65rem;color:#94a3b8;display:block;margin-top:0.25rem}
+
+  </style>
+</head>
+<body>
+  <div class="bg-mesh"></div>
+  <div class="bg-noise"></div>
+
+  <nav class="navbar scrolled">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/logo-ddpe.jpg" alt="DDPE" />
+        <div class="nav-brand-text">DUTA DIGITAL<span>PAPUA EMAS</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="btn btn-ghost" style="padding:0.4rem 1rem;font-size:0.85rem">Beranda</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="result-wrap" id="resultContent" style="display:none">
+    <div class="result-header animate-fade-up">
+      <div class="hero-badge" style="display:inline-flex">HASIL PEMETAAN POTENSI · 2026</div>
+      <h1>Halo, <span id="resultNama" class="gradient-text"></span></h1>
+      <p style="color:var(--text-muted);max-width:480px;margin:0.6rem auto 0;font-size:0.95rem">
+        Peta potensi dan rekomendasi peran berdasarkan jawaban situasional Anda.
+      </p>
+    </div>
+
+    <!-- Top match highlight -->
+    <div class="result-hero-card glass animate-fade-up" id="topMatchCard">
+      <div class="top-badge">✦ Kecocokan tertinggi</div>
+      <div class="top-role-title" id="topRoleTitle">—</div>
+      <p class="top-role-desc" id="topRoleDesc"></p>
+    </div>
+
+    <div class="section-label">Peta 12 dimensi</div>
+    <div class="radar-wrap glass animate-fade-up">
+      <canvas id="radarChart" width="400" height="400"></canvas>
+    </div>
+
+    <div class="section-label">Skor per dimensi</div>
+    <div class="dimension-list" id="dimList"></div>
+
+    <div class="section-label">Rekomendasi peran</div>
+    <div class="role-cards" id="roleCards"></div>
+
+    <!-- Twibbon -->
+    <div class="twibbon-section glass animate-fade-up">
+      <h3 style="margin-bottom:0.35rem;font-size:1.15rem">Twibbon Resmi DDPE</h3>
+      <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:0.5rem">
+        Unduh, unggah ke Instagram, lalu pakai caption di bawah.
+      </p>
+      <div class="twibbon-preview">
+        <canvas id="twibbonCanvas" width="1080" height="1080"></canvas>
+      </div>
+      <div class="action-row">
+        <button class="btn btn-gold" onclick="downloadTwibbon()">⬇ Unduh Twibbon</button>
+        <button class="btn btn-ghost" onclick="shareResult()">Bagikan Hasil</button>
+      </div>
+
+      <div class="caption-box glass-sm">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:0.5rem;margin-bottom:0.5rem">
+          <strong style="font-size:0.9rem">Caption Instagram</strong>
+          <button type="button" class="btn btn-ghost" style="padding:0.3rem 0.75rem;font-size:0.78rem" onclick="copyCaption()">Salin caption</button>
+        </div>
+        <textarea id="igCaption" readonly rows="7"></textarea>
+        <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem">Salin → tempel di Instagram bersama twibbon.</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:2.25rem">
+      <a href="assessment.html" class="btn btn-ghost">Isi ulang pemetaan</a>
+    </div>
+  </div>
+
+  <div id="noResult" style="display:none;text-align:center;padding:8rem 1.5rem">
+    <h2>Belum ada hasil</h2>
+    <p style="color:var(--text-muted);margin:1rem 0 1.5rem">Selesaikan pemetaan terlebih dahulu.</p>
+    <a href="assessment.html" class="btn btn-primary">Mulai Pemetaan</a>
+  </div>
+
+  <script src="js/questions-data.js"></script>
+  <script src="js/result.js"></script>
+
+  <div class="qr-float" id="qrFloat">
+    <img id="qrImg" alt="QR" width="72" height="72" />
+    <span>Scan halaman ini</span>
+  </div>
+
+  <script>
+  (function(){
+    var img=document.getElementById('qrImg');
+    if(!img) return;
+    img.src='https://api.qrserver.com/v1/create-qr-code/?size=144x144&bgcolor=0f0a1f&color=e2e8f0&data='+encodeURIComponent(window.location.href);
+  })();
+</script>
+</body>
+</html>

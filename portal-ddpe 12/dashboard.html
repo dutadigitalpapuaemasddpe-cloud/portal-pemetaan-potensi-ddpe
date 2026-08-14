@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Internal · DDPE</title>
+  <link rel="icon" href="assets/logo-ddpe.jpg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+    .qr-float{position:fixed;bottom:1rem;right:1rem;z-index:40;background:rgba(15,10,31,0.92);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:0.5rem;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,0.35)}
+    .qr-float img{width:72px;height:72px;display:block;border-radius:6px}
+    .qr-float span{font-size:0.65rem;color:#94a3b8;display:block;margin-top:0.25rem}
+</style>
+</head>
+<body>
+  <div class="bg-mesh"></div>
+  <div class="bg-noise"></div>
+
+  <!-- Login Gate -->
+  <div id="loginGate" class="dash-wrap">
+    <div class="dash-login glass-strong">
+      <img src="assets/logo-ddpe.jpg" alt="DDPE" style="width:64px;height:64px;border-radius:50%;margin-bottom:1.25rem;border:2px solid rgba(212,175,55,0.4)" />
+      <h2>Dashboard Internal</h2>
+      <p style="margin-bottom:0.75rem">Area pengelolaan data pemetaan. Saat ini hanya dapat diakses oleh Founder / Ketua Umum.</p>
+
+      <div class="glass-sm" style="padding:1rem;margin-bottom:1.5rem;text-align:left">
+        <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.55;margin:0">
+          <strong style="color:var(--gold-400)">Untuk pengurus lain:</strong><br>
+          Fitur dashboard bersama akan segera hadir setelah fase pemetaan selesai dan sistem lebih stabil. Saat ini fokus utama adalah mengisi form pemetaan potensi agar penempatan peran lebih tepat.
+        </p>
+      </div>
+
+      <div class="form-group" style="text-align:left">
+        <label>Password Founder</label>
+        <input type="password" id="dashPassword" placeholder="Password internal" />
+      </div>
+      <button class="btn btn-primary" style="width:100%;margin-top:0.5rem" onclick="tryLogin()">Masuk</button>
+      <a href="index.html" style="display:inline-block;margin-top:1.25rem;font-size:0.85rem;color:var(--purple-500)">← Kembali ke portal</a>
+    </div>
+  </div>
+
+  <!-- Dashboard Content -->
+  <div id="dashApp" style="display:none">
+    <nav class="navbar scrolled">
+      <div class="container nav-inner">
+        <a href="index.html" class="nav-brand">
+          <img src="assets/logo-ddpe.jpg" alt="DDPE" />
+          <div class="nav-brand-text">DASHBOARD<span>INTERNAL · FOUNDER</span></div>
+        </a>
+        <button class="btn btn-ghost" style="padding:0.4rem 1rem;font-size:0.85rem" onclick="logout()">Keluar</button>
+      </div>
+    </nav>
+
+    <div class="dash-wrap">
+      <div class="dash-grid">
+        <!-- Sidebar -->
+        <aside class="dash-sidebar glass">
+          <button class="dash-nav-item active" data-tab="overview" onclick="switchTab('overview')">
+            📊 Overview
+          </button>
+          <button class="dash-nav-item" data-tab="submissions" onclick="switchTab('submissions')">
+            👥 Submissions
+          </button>
+          <button class="dash-nav-item" data-tab="analytics" onclick="switchTab('analytics')">
+            📈 Analytics
+          </button>
+          <button class="dash-nav-item" data-tab="roles" onclick="switchTab('roles')">
+            🎯 Role Mapping
+          </button>
+          <button class="dash-nav-item" data-tab="settings" onclick="switchTab('settings')">
+            ⚙️ Settings
+          </button>
+        </aside>
+
+        <!-- Main -->
+        <main class="dash-content glass" id="tabContent">
+          <!-- filled by JS -->
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/questions-data.js"></script>
+  <script src="js/dashboard.js"></script>
+
+  <div class="qr-float" id="qrFloat">
+    <img id="qrImg" alt="QR" width="72" height="72" />
+    <span>Scan halaman ini</span>
+  </div>
+
+  <script>
+  (function(){
+    var img=document.getElementById('qrImg');
+    if(!img) return;
+    img.src='https://api.qrserver.com/v1/create-qr-code/?size=144x144&bgcolor=0f0a1f&color=e2e8f0&data='+encodeURIComponent(window.location.href);
+  })();
+</script>
+</body>
+</html>

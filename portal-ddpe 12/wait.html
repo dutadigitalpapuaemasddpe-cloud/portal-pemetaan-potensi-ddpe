@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terima kasih · DDPE 2026</title>
+  <link rel="icon" href="assets/logo-ddpe.jpg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <style>
+    .wait-wrap { max-width: 560px; margin: 0 auto; padding: 2rem 1rem 3.5rem; }
+    .wait-card { padding: 1.75rem 1.35rem; text-align: center; border-radius: 20px; margin-bottom: 1.25rem; }
+    .wait-card h1 { font-size: 1.35rem; margin: 0.75rem 0 0.5rem; line-height: 1.35; }
+    .wait-card .lead { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.25rem; line-height: 1.55; }
+    .code-box {
+      background: rgba(124,58,237,0.15);
+      border: 1px solid rgba(167,139,250,0.35);
+      border-radius: 14px; padding: 1rem 1.15rem; margin: 1rem 0; text-align: left;
+    }
+    .code-box label { font-size: 0.72rem; color: var(--text-muted); display: block; margin-bottom: 0.2rem; }
+    .code-box strong { font-size: 1.15rem; letter-spacing: 0.05em; color: #fbbf24; }
+    .code-row { display: flex; gap: 0.85rem; flex-wrap: wrap; }
+    .code-row > div { flex: 1; min-width: 110px; }
+    .countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.45rem; margin: 1.15rem 0 0.75rem; }
+    .cd-item { background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 12px; padding: 0.65rem 0.3rem; }
+    .cd-item .num { font-size: 1.35rem; font-weight: 700; color: #c4b5fd; }
+    .cd-item .lbl { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .hint { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem; line-height: 1.45; }
+    .twibbon-box { padding: 1.5rem 1.15rem; border-radius: 20px; text-align: center; margin-bottom: 1.25rem; }
+    .twibbon-box h2 { font-size: 1.1rem; margin-bottom: 0.35rem; }
+    .twibbon-preview {
+      width: min(300px, 85vw); height: min(300px, 85vw);
+      margin: 1rem auto; border-radius: 16px; overflow: hidden;
+      background: #0f0a1f; box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,175,55,0.25);
+    }
+    .twibbon-preview canvas { width: 100%; height: 100%; display: block; }
+    .caption-box { text-align: left; margin-top: 1rem; padding: 1rem; border-radius: 12px; }
+    .caption-box textarea {
+      width: 100%; min-height: 130px; resize: vertical;
+      background: rgba(0,0,0,0.28); border: 1px solid var(--glass-border);
+      border-radius: 10px; color: #e2e8f0; padding: 0.7rem;
+      font-size: 0.84rem; line-height: 1.5; font-family: Inter, sans-serif;
+    }
+    .action-row { display: flex; gap: 0.55rem; justify-content: center; flex-wrap: wrap; margin-top: 0.85rem; }
+    .qr-float {
+      position: fixed; bottom: 1rem; right: 1rem; z-index: 40;
+      background: rgba(15,10,31,0.92); border: 1px solid var(--glass-border);
+      border-radius: 12px; padding: 0.5rem; text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    }
+    .qr-float img { width: 72px; height: 72px; display: block; border-radius: 6px; }
+    .qr-float span { font-size: 0.65rem; color: var(--text-muted); display: block; margin-top: 0.25rem; }
+  </style>
+</head>
+<body>
+  <div class="bg-mesh"></div>
+  <div class="bg-noise"></div>
+
+  <div class="wait-wrap">
+    <!-- Twibbon SEGERA (tidak menunggu hasil) -->
+    <div class="twibbon-box glass" id="twibbonBox">
+      <div class="hero-badge" style="display:inline-flex;margin-bottom:0.5rem">SIAP POSTING</div>
+      <h2>Twibbon resmi Anda</h2>
+      <p class="hint" style="margin-bottom:0.25rem">Unduh & posting ke Instagram sekarang. Tidak perlu menunggu pengumuman hasil.</p>
+      <div class="twibbon-preview">
+        <canvas id="twibbonCanvas" width="1080" height="1080"></canvas>
+      </div>
+      <div class="action-row">
+        <button type="button" class="btn btn-gold" id="btnDownloadTwibbon">⬇ Unduh Twibbon</button>
+        <button type="button" class="btn btn-ghost" id="btnCopyCaption">Salin caption</button>
+      </div>
+      <div class="caption-box glass-sm">
+        <strong style="font-size:0.88rem">Caption Instagram</strong>
+        <textarea id="igCaption" readonly style="margin-top:0.45rem"></textarea>
+        <p class="hint">Tempel caption ini bersama twibbon di feed/story Instagram Anda.</p>
+      </div>
+    </div>
+
+    <!-- Terima kasih + countdown hasil lengkap -->
+    <div class="wait-card glass" id="waitCard">
+      <div style="font-size:1.75rem">🌿</div>
+      <h1 id="waitTitle">Terima kasih atas komitmen Anda</h1>
+      <p class="lead" id="waitLead">
+        Jawaban Anda sedang ditinjau leadership. <strong style="color:#c4b5fd">Hasil pemetaan lengkap</strong> (radar & rekomendasi peran) dibuka bersamaan.
+      </p>
+
+      <div class="code-box" id="codeBox">
+        <div class="code-row">
+          <div>
+            <label>Nomor unik Anda</label>
+            <strong id="uniqueCode">—</strong>
+          </div>
+          <div>
+            <label>PIN akses</label>
+            <strong id="pinCode">—</strong>
+          </div>
+        </div>
+        <p class="hint" style="margin-top:0.65rem">Simpan kode & PIN ini untuk membuka hasil nanti.</p>
+      </div>
+
+      <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:0.35rem">Hasil lengkap dibuka — Minggu, 16 Agustus 2026 · 18.00 WIT</p>
+      <div class="countdown" id="countdown">
+        <div class="cd-item"><div class="num" id="cdD">0</div><div class="lbl">Hari</div></div>
+        <div class="cd-item"><div class="num" id="cdH">00</div><div class="lbl">Jam</div></div>
+        <div class="cd-item"><div class="num" id="cdM">00</div><div class="lbl">Menit</div></div>
+        <div class="cd-item"><div class="num" id="cdS">00</div><div class="lbl">Detik</div></div>
+      </div>
+      <p class="hint">Twibbon sudah bisa diposting sekarang. Radar & rekomendasi peran menyusul di waktu pengumuman.</p>
+
+      <div class="action-row" style="margin-top:1.35rem">
+        <a href="index.html" class="btn btn-ghost">Beranda</a>
+        <button class="btn btn-primary" id="btnCheckReady" type="button">Cek hasil lengkap</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="qr-float" id="qrFloat">
+    <img id="qrImg" alt="QR halaman" width="72" height="72" />
+    <span>Scan halaman ini</span>
+  </div>
+
+  <script>
+    const DDPE_ANNOUNCE_AT = '2026-08-16T18:00:00+09:00';
+
+    function loadData() {
+      const raw = localStorage.getItem('ddpe_last_result');
+      if (!raw) return null;
+      try { return JSON.parse(raw); } catch { return null; }
+    }
+
+    const data = loadData();
+    if (data) {
+      document.getElementById('uniqueCode').textContent = data.uniqueCode || '—';
+      document.getElementById('pinCode').textContent = data.pin || '—';
+      const nama = (data.personal && (data.personal.panggilan || data.personal.nama)) || '';
+      if (nama) {
+        document.getElementById('waitTitle').textContent = 'Terima kasih, ' + String(nama).split(' ')[0];
+      }
+    }
+
+    /* ---- Caption ---- */
+    function buildCaption() {
+      const nama = (data && data.personal && data.personal.nama) || 'Pengurus DDPE';
+      return `Hari ini saya menyelesaikan Pemetaan Potensi Duta Digital Papua Emas 2026.
+
+Bukan soal siapa yang paling menonjol — tapi di mana setiap potensi bisa bertumbuh. Terima kasih DDPE yang membuka ruang agar kami menemukan peran yang lebih sesuai.
+
+Siap berkontribusi dengan lebih tepat sasaran. ✨
+
+#dutadigitalpapuaemas #ddpe2026 #pemetaanpotensi #literasidigital #inovasidigital`;
+    }
+    document.getElementById('igCaption').value = buildCaption();
+
+    document.getElementById('btnCopyCaption').addEventListener('click', () => {
+      const el = document.getElementById('igCaption');
+      el.select();
+      el.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(el.value).then(() => {
+        alert('Caption disalin. Tempel di Instagram bersama twibbon.');
+      }).catch(() => alert('Salin manual dari kotak caption.'));
+    });
+
+    /* ---- Twibbon generator (langsung) ---- */
+    function roundRectPath(ctx, x, y, w, h, r) {
+      const radius = Math.min(r, w / 2, h / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.arcTo(x + w, y, x + w, y + h, radius);
+      ctx.arcTo(x + w, y + h, x, y + h, radius);
+      ctx.arcTo(x, y + h, x, y, radius);
+      ctx.arcTo(x, y, x + w, y, radius);
+      ctx.closePath();
+    }
+
+    function generateTwibbon() {
+      const canvas = document.getElementById('twibbonCanvas');
+      const ctx = canvas.getContext('2d');
+      const size = 1080;
+      canvas.width = size;
+      canvas.height = size;
+      const slot = { x: 170, y: 140, w: 790, h: 760 };
+
+      function drawFallbackPhoto() {
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(0, 0, size, size);
+        if (data && data.fotoDataUrl) {
+          const photo = new Image();
+          photo.onload = () => {
+            const pad = 60;
+            const scale = Math.min((size - pad * 2) / photo.width, (size - pad * 2) / photo.height);
+            const pw = photo.width * scale;
+            const ph = photo.height * scale;
+            const px = (size - pw) / 2;
+            const py = (size - ph) / 2;
+            ctx.save();
+            roundRectPath(ctx, pad, pad, size - pad * 2, size - pad * 2, 32);
+            ctx.clip();
+            ctx.drawImage(photo, px, py, pw, ph);
+            ctx.restore();
+            ctx.strokeStyle = '#d4af37';
+            ctx.lineWidth = 14;
+            roundRectPath(ctx, pad, pad, size - pad * 2, size - pad * 2, 32);
+            ctx.stroke();
+            ctx.fillStyle = '#fbbf24';
+            ctx.font = 'bold 40px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('DDPE · 2026', size / 2, size - 36);
+          };
+          photo.onerror = () => {
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '28px Inter, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Foto tidak tersedia', size / 2, size / 2);
+          };
+          photo.src = data.fotoDataUrl;
+        } else {
+          ctx.fillStyle = '#94a3b8';
+          ctx.font = '26px Inter, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('Twibbon belum siap', size / 2, size / 2 - 20);
+          ctx.font = '22px Inter, sans-serif';
+          ctx.fillText('Isi form dulu, atau buka via ddpe.my.id', size / 2, size / 2 + 20);
+        }
+      }
+
+      function finish(photoImg, frameImg) {
+        ctx.clearRect(0, 0, size, size);
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(0, 0, size, size);
+        if (photoImg) {
+          const scale = Math.max(slot.w / photoImg.width, slot.h / photoImg.height);
+          const pw = photoImg.width * scale;
+          const ph = photoImg.height * scale;
+          const px = slot.x + (slot.w - pw) / 2;
+          const py = slot.y + (slot.h - ph) / 2;
+          ctx.save();
+          roundRectPath(ctx, slot.x, slot.y, slot.w, slot.h, 24);
+          ctx.clip();
+          ctx.drawImage(photoImg, px, py, pw, ph);
+          ctx.restore();
+        }
+        if (frameImg) {
+          ctx.drawImage(frameImg, 0, 0, size, size);
+        }
+      }
+
+      const frame = new Image();
+      frame.crossOrigin = 'anonymous';
+      const paths = ['assets/twibbon-frame.png', './assets/twibbon-frame.png'];
+      let pathIdx = 0;
+
+      function tryLoadFrame() {
+        if (pathIdx >= paths.length) {
+          drawFallbackPhoto();
+          return;
+        }
+        frame.onload = () => {
+          if (data && data.fotoDataUrl) {
+            const photo = new Image();
+            photo.onload = () => finish(photo, frame);
+            photo.onerror = () => finish(null, frame);
+            photo.src = data.fotoDataUrl;
+          } else {
+            finish(null, frame);
+          }
+        };
+        frame.onerror = () => {
+          pathIdx++;
+          tryLoadFrame();
+        };
+        frame.src = paths[pathIdx];
+      }
+      tryLoadFrame();
+    }
+
+    document.getElementById('btnDownloadTwibbon').addEventListener('click', () => {
+      const canvas = document.getElementById('twibbonCanvas');
+      const link = document.createElement('a');
+      const safe = ((data && data.personal && data.personal.nama) || 'peserta').replace(/\s+/g, '-');
+      link.download = 'twibbon-ddpe-' + safe + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+
+    generateTwibbon();
+
+    /* ---- Countdown hasil lengkap ---- */
+    function tick() {
+      const end = new Date(DDPE_ANNOUNCE_AT).getTime();
+      const now = Date.now();
+      let diff = Math.max(0, end - now);
+      if (diff === 0) {
+        document.getElementById('waitTitle').textContent = 'Hasil lengkap sudah siap';
+        document.getElementById('waitLead').textContent =
+          'Pemetaan telah diproses. Silakan buka hasil potensi (radar & rekomendasi peran).';
+        document.getElementById('btnCheckReady').textContent = 'Lihat hasil lengkap';
+      }
+      const d = Math.floor(diff / 86400000); diff %= 86400000;
+      const h = Math.floor(diff / 3600000); diff %= 3600000;
+      const m = Math.floor(diff / 60000); diff %= 60000;
+      const s = Math.floor(diff / 1000);
+      document.getElementById('cdD').textContent = String(d);
+      document.getElementById('cdH').textContent = String(h).padStart(2, '0');
+      document.getElementById('cdM').textContent = String(m).padStart(2, '0');
+      document.getElementById('cdS').textContent = String(s).padStart(2, '0');
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    document.getElementById('btnCheckReady').addEventListener('click', () => {
+      if (!data) {
+        alert('Data pemetaan tidak ditemukan di perangkat ini.');
+        location.href = 'index.html';
+        return;
+      }
+      if (Date.now() >= new Date(DDPE_ANNOUNCE_AT).getTime()) {
+        location.href = 'result.html';
+      } else {
+        alert('Hasil lengkap (radar & peran) dibuka Minggu, 16 Agustus 2026 pukul 18.00 WIT.\n\nTwibbon di atas sudah bisa diunduh dan diposting sekarang.');
+      }
+    });
+
+    /* ---- QR code halaman ---- */
+    (function () {
+      const url = window.location.href;
+      document.getElementById('qrImg').src =
+        'https://api.qrserver.com/v1/create-qr-code/?size=144x144&bgcolor=0f0a1f&color=e2e8f0&data=' +
+        encodeURIComponent(url);
+    })();
+  </script>
+</body>
+</html>

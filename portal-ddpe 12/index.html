@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Pemetaan Potensi DDPE · 2026</title>
+  <meta name="description" content="Portal resmi pemetaan ulang pengurus Duta Digital Papua Emas. Temukan peran yang tepat berdasarkan potensi, bukan popularitas." />
+  <link rel="icon" href="assets/logo-ddpe.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+<style>
+    .qr-float{position:fixed;bottom:1rem;right:1rem;z-index:40;background:rgba(15,10,31,0.92);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:0.5rem;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,0.35)}
+    .qr-float img{width:72px;height:72px;display:block;border-radius:6px}
+    .qr-float span{font-size:0.65rem;color:#94a3b8;display:block;margin-top:0.25rem}
+</style>
+</head>
+<body>
+  <div class="bg-mesh"></div>
+  <div class="bg-noise"></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/logo-ddpe.jpg" alt="DDPE Logo" />
+        <div class="nav-brand-text">
+          DUTA DIGITAL
+          <span>PAPUA EMAS</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="#pilar">Pilar</a>
+        <a href="#tentang">Tentang</a>
+        <a href="#alur">Alur</a>
+        <a href="assessment.html" class="btn btn-primary" style="padding: 0.5rem 1.15rem; font-size: 0.85rem;">Mulai Pemetaan</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-badge animate-fade-up">DDPE · PEMETAAN ULANG 2026</div>
+        <h1 class="animate-fade-up animate-delay-1">
+          <span class="line1">Bukan mencari siapa yang paling menonjol.</span>
+          <span class="line2">Mencari di mana setiap potensi bertumbuh.</span>
+        </h1>
+        <p class="hero-desc animate-fade-up animate-delay-2">
+          Portal pemetaan kemampuan, minat, gaya kerja, dan kesiapan pengurus Duta Digital Papua Emas untuk penempatan yang lebih adil dan efektif.
+        </p>
+        <div class="hero-actions animate-fade-up animate-delay-3">
+          <a href="assessment.html" class="btn btn-primary">Mulai pemetaan potensi</a>
+          <a href="#" class="btn btn-ghost" id="btnSudahMengisi">Saya sudah mengisi</a>
+        </div>
+        <p class="announce-note animate-fade-up animate-delay-3">
+          Pengisian: <strong>Jumat</strong> · Pengumuman hasil: <strong>Minggu, 16 Agustus 2026 · 18.00 WIT</strong>
+        </p>
+      </div>
+
+      <div class="hero-visual animate-fade-up animate-delay-2">
+        <div class="hero-logo-wrap">
+          <img src="assets/logo-ddpe.jpg" alt="Logo DDPE" class="hero-main-logo" />
+          <div class="floating-card glass pilar1">
+            <img src="assets/logo-pilar1-literasi.jpg" alt="Pilar Literasi" />
+            <div>
+              <div class="pilar-tag">PILAR I</div>
+              Literasi Digital
+            </div>
+          </div>
+          <div class="floating-card glass pilar2">
+            <img src="assets/logo-pilar2-inovasi.jpg" alt="Pilar Inovasi" />
+            <div>
+              <div class="pilar-tag">PILAR II</div>
+              Inovasi Digital
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dua Pilar -->
+  <section class="section" id="pilar">
+    <div class="container">
+      <h2 class="section-title">Dua Pilar DDPE</h2>
+      <p class="section-sub">Satu visi, dua jalur kontribusi — literasi dan inovasi digital untuk Papua Emas.</p>
+
+      <div class="pilar-showcase">
+        <div class="pilar-panel glass animate-fade-up">
+          <img src="assets/logo-pilar1-literasi.jpg" alt="Duta Literasi Digital Papua Emas" class="pilar-logo" />
+          <div class="pilar-label">PILAR I</div>
+          <h3>Duta Literasi Digital Papua Emas</h3>
+          <p>Membangun generasi cerdas di era digital melalui edukasi, fasilitasi, dan kampanye literasi yang membumi.</p>
+        </div>
+        <div class="pilar-panel glass animate-fade-up animate-delay-1">
+          <img src="assets/logo-pilar2-inovasi.jpg" alt="Duta Inovasi Digital Papua Emas" class="pilar-logo" />
+          <div class="pilar-label">PILAR II</div>
+          <h3>Duta Inovasi Digital Papua Emas</h3>
+          <p>Mendorong solusi kreatif berbasis teknologi — desain, riset, dan manajemen proyek untuk dampak nyata.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tentang">
+    <div class="container">
+      <h2 class="section-title">Kenapa pemetaan ulang?</h2>
+      <p class="section-sub">Struktur mengikuti kebutuhan kerja, bukan kebutuhan gelar. — Guide Book DDPE v1.0</p>
+
+      <div class="features-grid">
+        <div class="feature-card glass">
+          <div class="feature-icon">🎯</div>
+          <h3>Potensi, bukan popularitas</h3>
+          <p>20 pernyataan situasional mengukur gaya berpikir dan bekerja tanpa self-selection jabatan.</p>
+        </div>
+        <div class="feature-card glass">
+          <div class="feature-icon">🏛️</div>
+          <h3>Dua Pilar, banyak kontribusi</h3>
+          <p>Literasi butuh edukator, fasilitator, campaigner. Inovasi butuh designer, researcher, project manager.</p>
+        </div>
+        <div class="feature-card glass">
+          <div class="feature-icon">⏳</div>
+          <h3>Dicek leadership, diumumkan bersamaan</h3>
+          <p>Jawaban ditinjau founder selama 2 hari. Hasil dibuka Minggu sore untuk semua peserta sekaligus.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="alur" style="padding-top:0">
+    <div class="container">
+      <h2 class="section-title">Alur peserta</h2>
+      <p class="section-sub">Isi Jumat · Ditinjau leadership · Pengumuman Minggu 18.00 WIT</p>
+
+      <div class="flow-steps">
+        <div class="flow-step glass-sm">
+          <div class="flow-num">1</div>
+          <h4>Data diri</h4>
+          <p>Identitas dasar tanpa NIK atau alamat lengkap</p>
+        </div>
+        <div class="flow-step glass-sm">
+          <div class="flow-num">2</div>
+          <h4>20 pernyataan</h4>
+          <p>Jawab situasional secara alami sesuai kebiasaan</p>
+        </div>
+        <div class="flow-step glass-sm">
+          <div class="flow-num">3</div>
+          <h4>Foto & profil</h4>
+          <p>Crop foto untuk twibbon resmi DDPE</p>
+        </div>
+        <div class="flow-step glass-sm">
+          <div class="flow-num">4</div>
+          <h4>Tunggu 2 hari</h4>
+          <p>Leadership meninjau jawaban secara saksama</p>
+        </div>
+        <div class="flow-step glass-sm">
+          <div class="flow-num">5</div>
+          <h4>Pengumuman</h4>
+          <p>Hasil & twibbon dibuka Minggu, 18.00 WIT</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:2rem">
+    <div class="container">
+      <div class="glass-strong cta-final">
+        <h2>Siap menemukan peran yang tepat?</h2>
+        <p>Isi sebagai diri sendiri. Bertumbuh di tempat yang sesuai.</p>
+        <a href="assessment.html" class="btn btn-gold">Mulai sekarang</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logos">
+        <img src="assets/logo-ddpe.jpg" alt="DDPE" />
+        <img src="assets/logo-pilar1-literasi.jpg" alt="Literasi" />
+        <img src="assets/logo-pilar2-inovasi.jpg" alt="Inovasi" />
+      </div>
+      <p>© 2026 Duta Digital Papua Emas · Dokumen internal organisasi</p>
+      <p class="footer-note">Bukan penetapan DDPE sebagai lembaga/duta resmi pemerintah.</p>
+    </div>
+  </footer>
+
+  <!-- Login modal -->
+  <div id="loginModal" class="modal-overlay">
+    <div class="glass modal-card">
+      <h3>Akses hasil pemetaan</h3>
+      <p class="modal-desc">Masukkan nomor unik dan PIN yang Anda terima setelah mengisi formulir.</p>
+      <div class="form-group">
+        <label>Nomor unik</label>
+        <input id="loginCode" type="text" placeholder="DDPE-XXXXXX" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label>PIN</label>
+        <input id="loginPin" type="password" placeholder="4 digit" maxlength="6" autocomplete="off" />
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="btnLoginCancel">Batal</button>
+        <button type="button" class="btn btn-primary" id="btnLoginSubmit">Masuk</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Pengumuman bersamaan: Minggu, 16 Agustus 2026, 18:00 WIT */
+    const DDPE_ANNOUNCE_AT = '2026-08-16T18:00:00+09:00';
+
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+    document.querySelectorAll('.animate-fade-up').forEach(el => {
+      el.style.animationPlayState = 'running';
+    });
+
+    document.getElementById('btnSudahMengisi')?.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.getElementById('loginModal').classList.add('show');
+    });
+    document.getElementById('btnLoginCancel')?.addEventListener('click', () => {
+      document.getElementById('loginModal').classList.remove('show');
+    });
+    document.getElementById('loginModal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'loginModal') e.target.classList.remove('show');
+    });
+
+    document.getElementById('btnLoginSubmit')?.addEventListener('click', () => {
+      const code = (document.getElementById('loginCode').value || '').trim().toUpperCase();
+      const pin = (document.getElementById('loginPin').value || '').trim();
+      if (!code || !pin) {
+        alert('Masukkan nomor unik dan PIN.');
+        return;
+      }
+      const byCode = JSON.parse(localStorage.getItem('ddpe_results_by_code') || '{}');
+      let data = byCode[code];
+      if (!data) {
+        try {
+          const last = JSON.parse(localStorage.getItem('ddpe_last_result') || 'null');
+          if (last && last.uniqueCode === code) data = last;
+        } catch {}
+      }
+      if (!data) {
+        alert('Nomor unik tidak ditemukan. Pastikan Anda mengisi dari perangkat yang sama, atau simpan nomor unik saat submit.');
+        return;
+      }
+      if (String(data.pin) !== String(pin)) {
+        alert('PIN tidak sesuai.');
+        return;
+      }
+      localStorage.setItem('ddpe_last_result', JSON.stringify(data));
+      const ready = Date.now() >= new Date(DDPE_ANNOUNCE_AT).getTime();
+      window.location.href = ready ? 'result.html' : 'wait.html';
+    });
+  </script>
+
+  <div class="qr-float" id="qrFloat">
+    <img id="qrImg" alt="QR" width="72" height="72" />
+    <span>Scan halaman ini</span>
+  </div>
+
+  <script>
+  (function(){
+    var img=document.getElementById('qrImg');
+    if(!img) return;
+    img.src='https://api.qrserver.com/v1/create-qr-code/?size=144x144&bgcolor=0f0a1f&color=e2e8f0&data='+encodeURIComponent(window.location.href);
+  })();
+</script>
+</body>
+</html>
